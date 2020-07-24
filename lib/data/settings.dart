@@ -56,8 +56,11 @@ class Settings with ChangeNotifier {
 
   get time => DateFormat.Hm().format(timeTravelling ? timeTravelTime : _now);
 
-  get dateAndMonth =>
-      DateFormat('EEE, MMM d').format(timeTravelling ? timeTravelTime : _now);
+  get closeToMinuteFormat =>
+      _now.second >= 60 - _timeToAdd - 3 ? 'EEE. MMM d' : 'EEE, MMM d';
+
+  get dateAndMonth => DateFormat(closeToMinuteFormat)
+      .format(timeTravelling ? timeTravelTime : _now);
 
   set setTimeToAdd(int num) {
     _timeToAdd = num;
