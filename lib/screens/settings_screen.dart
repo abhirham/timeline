@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timeline/constants.dart';
 import 'package:timeline/data/settings.dart';
@@ -55,7 +56,10 @@ class SettingsScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(DraggableScreen.id);
+                  SystemChrome.setEnabledSystemUIOverlays([]);
+                  Navigator.pushNamed(context, DraggableScreen.id).then((v) =>
+                      SystemChrome.setEnabledSystemUIOverlays(
+                          SystemUiOverlay.values));
                 },
                 child: CustomListTile(
                   center: Text('Set Time Display Area'),

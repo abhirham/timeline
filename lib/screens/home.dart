@@ -19,8 +19,11 @@ class HomeScreen extends StatelessWidget {
     return TwoFingerPointerWidget(
       onUpdate: (DragUpdateDetails details) {
         if (details.delta.direction > 0) {
-          Navigator.pushNamed(context, SettingsScreen.id)
-              .then((value) => context.read<Settings>().saveData());
+          SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+          Navigator.pushNamed(context, SettingsScreen.id).then((value) {
+            SystemChrome.setEnabledSystemUIOverlays([]);
+            context.read<Settings>().saveData();
+          });
         } else if (details.delta.direction < 0) {
           SystemNavigator.pop();
         }
