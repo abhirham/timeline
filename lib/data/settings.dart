@@ -15,6 +15,7 @@ class Settings with ChangeNotifier {
   String extraMins = "0", screenShotPath, clockDownScreenShotPath;
   DateTime _now = DateTime.now();
   int _timeToAdd = 0;
+  double x = 0, y = 0, width = 50, height = 50;
 
   Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
@@ -69,6 +70,26 @@ class Settings with ChangeNotifier {
     notifyListeners();
   }
 
+  set setX(double val) {
+    x = val;
+    notifyListeners();
+  }
+
+  set setY(double val) {
+    y = val;
+    notifyListeners();
+  }
+
+  set setWidth(double val) {
+    width = val;
+    notifyListeners();
+  }
+
+  set setHeight(double val) {
+    height = val;
+    notifyListeners();
+  }
+
   void setScreenShot(String path) {
     screenShotPath = path;
     notifyListeners();
@@ -116,18 +137,25 @@ class Settings with ChangeNotifier {
     extraMins = pref.getString('extraMins') ?? extraMins;
     screenShotPath = pref.getString('screenShot');
     clockDownScreenShotPath = pref.getString('clockDownScreenShot');
+    x = pref.getDouble('x') ?? x;
+    y = pref.getDouble('y') ?? y;
+    width = pref.getDouble('width') ?? width;
+    height = pref.getDouble('height') ?? height;
     notifyListeners();
     return;
   }
 
   void saveData() async {
     SharedPreferences pref = await _pref;
-
     pref.setBool('useInputScreen', useInputScreen);
     pref.setBool('hideInputScreen', hideInputScreen);
     pref.setString('mode', mode.toString());
     pref.setString('extraMins', extraMins);
     pref.setString('screenShot', screenShotPath);
     pref.setString('clockDownScreenShot', clockDownScreenShotPath);
+    pref.setDouble('x', x);
+    pref.setDouble('y', y);
+    pref.setDouble('width', width);
+    pref.setDouble('height', height);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:screen/screen.dart';
 import 'package:timeline/data/settings.dart';
+import 'package:timeline/screens/draggable_screen.dart';
 import 'package:timeline/screens/home.dart';
 import 'package:timeline/screens/settings_screen.dart';
 
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       initialRoute: HomeScreen.id,
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
-        SettingsScreen.id: (context) => SettingsScreen()
+        SettingsScreen.id: (context) => SettingsScreen(),
+        DraggableScreen.id: (_) => DraggableScreen()
       },
     );
   }

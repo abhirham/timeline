@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:timeline/constants.dart';
-import 'package:timeline/constants.dart';
 import 'package:timeline/data/settings.dart';
+import 'package:timeline/screens/draggable_screen.dart';
 import 'package:timeline/widgets/customSwitchListTile.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +51,14 @@ class SettingsScreen extends StatelessWidget {
                 },
                 child: CustomListTile(
                   center: Text('Set Clock Down Screenshot'),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(DraggableScreen.id);
+                },
+                child: CustomListTile(
+                  center: Text('Set Time Display Area'),
                 ),
               )
             ],

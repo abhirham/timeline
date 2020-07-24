@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:timeline/data/settings.dart';
 import 'package:timeline/screens/settings_screen.dart';
 import 'package:timeline/widgets/inputScreen.dart';
+import 'package:timeline/widgets/stretchedImage.dart';
 import 'package:timeline/widgets/twoFingerPointer.dart';
 import 'package:provider/provider.dart';
 
@@ -77,43 +76,30 @@ class CustomStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        StretchedImage(context.watch<Settings>().screenShotPath),
-        ClipRect(
-          clipper: MyClipper(),
-          child:
-              StretchedImage(context.watch<Settings>().clockDownScreenShotPath),
-        ),
-        child
-      ],
-    );
-  }
-}
-
-class StretchedImage extends StatelessWidget {
-  final String path;
-
-  StretchedImage(this.path);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: FileImage(
-          File(path ?? ""),
-        ),
-        fit: BoxFit.fill,
-      )),
+    return Consumer<Settings>(
+      builder: (_, settings, __) => Stack(
+        children: [
+          StretchedImage(settings.screenShotPath),
+          ClipRect(
+            clipper: MyClipper(settings),
+            child: StretchedImage(settings.clockDownScreenShotPath),
+          ),
+          child
+        ],
+      ),
     );
   }
 }
 
 class MyClipper extends CustomClipper<Rect> {
+  final Settings _settings;
+
+  MyClipper(this._settings);
+
   @override
   getClip(Size size) {
-    Rect rect = Rect.fromLTWH(50, 150.0, 300, 100);
+    Rect rect = Rect.fromLTWH(
+        _settings.x, _settings.y, _settings.width, _settings.height);
     return rect;
   }
 
