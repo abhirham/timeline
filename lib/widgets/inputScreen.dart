@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:timeline/data/settings.dart';
@@ -9,6 +11,16 @@ class InputScreen extends StatefulWidget {
 
 class _InputScreenState extends State<InputScreen> {
   Color color = Colors.white;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 2), () {
+      setState(() {
+        color = Colors.black;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
