@@ -10,11 +10,11 @@ class DraggableRect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Settings>(
       builder: (_, settings, __) => Positioned(
-        top: settings.y,
-        left: settings.x,
+        top: settings.y - 10,
+        left: settings.x - 10,
         child: SizedBox(
-          width: settings.width,
-          height: settings.height,
+          width: settings.width + 20,
+          height: settings.height + 20,
           child: Stack(
             children: [
               Positioned(
@@ -26,8 +26,8 @@ class DraggableRect extends StatelessWidget {
                     settings.setY = settings.y + tapInfo.delta.dy;
                   },
                   child: Container(
-                    width: settings.width - 20,
-                    height: settings.height - 20,
+                    width: settings.width,
+                    height: settings.height,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.white, width: 2.0),
                       color: Colors.transparent,
