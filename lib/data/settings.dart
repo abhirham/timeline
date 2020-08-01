@@ -103,7 +103,9 @@ class Settings with ChangeNotifier {
     notifyListeners();
   }
 
-  get timeTravelTime => _now.add(Duration(minutes: _timeToAdd));
+  get timeTravelTime => mode == timeTravel.Backward
+      ? _now.add(Duration(minutes: _timeToAdd))
+      : _now.subtract(Duration(minutes: _timeToAdd));
 
   void prepMagic() {
     timeTravelling = true;
