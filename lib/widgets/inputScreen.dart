@@ -11,17 +11,24 @@ class InputScreen extends StatefulWidget {
 
 class _InputScreenState extends State<InputScreen> {
   Color color = Colors.white;
+  Timer _timer;
 
   @override
   void initState() {
     super.initState();
     if (context.read<Settings>().hideInputScreen) {
-      Timer(Duration(seconds: 2), () {
+      _timer = Timer(Duration(seconds: 2), () {
         setState(() {
           color = Colors.black;
         });
       });
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timer != null) _timer.cancel();
   }
 
   @override
