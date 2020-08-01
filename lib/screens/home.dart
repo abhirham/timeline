@@ -33,7 +33,12 @@ class HomeScreen extends StatelessWidget {
           context.read<Settings>().startTimeTravel();
         },
         onLongPress: () {
-          context.read<Settings>().showInputScreen = true;
+          if (context.read<Settings>().useInputScreen) {
+            context.read<Settings>().showInputScreen = true;
+          } else {
+            context.read<Settings>().setTimeToAdd = 0;
+            context.read<Settings>().prepMagic();
+          }
         },
         child: Scaffold(
           backgroundColor: Colors.transparent,

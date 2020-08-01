@@ -110,20 +110,7 @@ class SettingsScreen extends StatelessWidget {
             leading: Text('Add Extra Minutes'),
             trailing: SizedBox(
               width: 30.0,
-              child: TextField(
-//                controller: TextEditingController()
-//                  ..text = context.read<Settings>().extraMins,
-                onChanged: (val) {
-                  print(val);
-                  context.read<Settings>().setExtraMins(val);
-                },
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-                cursorColor: kCupertinoSegmentedControlColor,
-                textAlign: TextAlign.right,
-                keyboardType: TextInputType.number,
-              ),
+              child: CustomTextField(),
             ),
           ),
           Padding(
@@ -133,6 +120,45 @@ class SettingsScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class CustomTextField extends StatefulWidget {
+  @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  TextEditingController _controller = TextEditingController();
+  FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller.text = context.read<Settings>().extraMins;
+
+    _focusNode.addListener(() {
+      _controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: _controller.text.length));
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: _controller,
+      focusNode: _focusNode,
+      onChanged: (val) {
+        context.read<Settings>().setExtraMins(val);
+      },
+      decoration: InputDecoration(
+        border: InputBorder.none,
+      ),
+      cursorColor: kCupertinoSegmentedControlColor,
+      textAlign: TextAlign.right,
+      keyboardType: TextInputType.number,
     );
   }
 }
