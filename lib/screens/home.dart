@@ -92,9 +92,25 @@ class CustomStack extends StatelessWidget {
             clipper: MyClipper(settings),
             child: StretchedImage(settings.clockDownScreenShotPath),
           ),
-          child
+          child,
+          CloseToMinuteIndicator()
         ],
       ),
+    );
+  }
+}
+
+class CloseToMinuteIndicator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomRight,
+      child: context.watch<Settings>().closeToMinute
+          ? Icon(
+              Icons.radio_button_unchecked,
+              color: Colors.white,
+            )
+          : null,
     );
   }
 }
