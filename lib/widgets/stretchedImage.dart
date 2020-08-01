@@ -8,11 +8,15 @@ class StretchedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (path == null) {
+      return Container();
+    }
+
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
         image: FileImage(
-          File(path ?? ""),
+          File(path),
         ),
         fit: BoxFit.fill,
       )),

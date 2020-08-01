@@ -62,7 +62,7 @@ class Settings with ChangeNotifier {
       DateFormat('EEE, MMM d').format(timeTravelling ? timeTravelTime : _now);
 
   set setTimeToAdd(int num) {
-    _timeToAdd = num + int.parse(extraMins);
+    _timeToAdd = num + int.parse('0$extraMins');
   }
 
   get showInputScreen => _showInputScreen;
