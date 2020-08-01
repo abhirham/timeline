@@ -15,11 +15,13 @@ class _InputScreenState extends State<InputScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
-      setState(() {
-        color = Colors.black;
+    if (context.read<Settings>().hideInputScreen) {
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          color = Colors.black;
+        });
       });
-    });
+    }
   }
 
   @override
