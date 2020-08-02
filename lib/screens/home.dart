@@ -43,32 +43,28 @@ class HomeScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: CustomStack(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(top: 154),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        context.watch<Settings>().time,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 60.0,
-                            fontWeight: FontWeight.w300),
-                      ),
-                      Text(
-                        context.watch<Settings>().dateAndMonth,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
+            child: Positioned(
+              top: context.watch<Settings>().y,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    context.watch<Settings>().time,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 60.0,
+                        fontWeight: FontWeight.w300),
                   ),
-                )
-              ],
+                  Text(
+                    context.watch<Settings>().dateAndMonth,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
