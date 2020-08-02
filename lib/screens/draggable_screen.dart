@@ -18,15 +18,13 @@ class DraggableScreen extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.only(bottom: 20.0),
-              child: Container(
-                height: 30.0,
-                width: 200.0,
-                child: RaisedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Done'),
-                ),
+              child: FlatButton(
+                color: Colors.white,
+                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 60.0),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Done'),
               ),
             ),
           )
