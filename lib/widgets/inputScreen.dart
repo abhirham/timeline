@@ -17,7 +17,7 @@ class _InputScreenState extends State<InputScreen> {
   void initState() {
     super.initState();
     if (context.read<Settings>().hideInputScreen) {
-      _timer = Timer(Duration(seconds: 2), () {
+      _timer = Timer(Duration(milliseconds: 700), () {
         setState(() {
           color = Colors.black;
         });
