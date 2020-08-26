@@ -7,31 +7,44 @@ import 'package:timeline/screens/draggable_screen.dart';
 import 'package:timeline/screens/home.dart';
 import 'package:timeline/screens/settings_screen.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays([]);
 
-  Settings _settings = Settings();
-  await _settings.getData();
-
   runApp(ChangeNotifierProvider(
-    create: (_) => _settings,
+    create: (_) => Settings(),
     child: MyApp(),
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Future<void> _future;
+
+  @override
+  void initState() {
+    _future = context.read<Settings>().getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Screen.keepOn(true);
-    return MaterialApp(
-      title: 'TimeLine',
-      initialRoute: HomeScreen.id,
-      routes: {
-        HomeScreen.id: (context) => HomeScreen(),
-        SettingsScreen.id: (context) => SettingsScreen(),
-        DraggableScreen.id: (_) => DraggableScreen()
-      },
+    return FutureBuilder(
+      future: _future,
+      builder: (_, __) => MaterialApp(
+        title: 'TimeLine',
+        initialRoute: HomeScreen.id,
+        routes: {
+          HomeScreen.id: (context) => HomeScreen(),
+          SettingsScreen.id: (context) => SettingsScreen(),
+          DraggableScreen.id: (_) => DraggableScreen()
+        },
+      ),
     );
   }
 }
