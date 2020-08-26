@@ -94,12 +94,10 @@ class Settings with ChangeNotifier {
 
   void setScreenShot(String path) {
     screenShotPath = path;
-    notifyListeners();
   }
 
   void setClockDownScreenShot(String path) {
     clockDownScreenShotPath = path;
-    notifyListeners();
   }
 
   get timeTravelTime => mode == timeTravel.Backward
@@ -145,7 +143,6 @@ class Settings with ChangeNotifier {
     y = pref.getDouble('y') ?? y;
     width = pref.getDouble('width') ?? width;
     height = pref.getDouble('height') ?? height;
-//    notifyListeners();
     return;
   }
 
