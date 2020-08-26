@@ -145,7 +145,7 @@ class Settings with ChangeNotifier {
     y = pref.getDouble('y') ?? y;
     width = pref.getDouble('width') ?? width;
     height = pref.getDouble('height') ?? height;
-    notifyListeners();
+//    notifyListeners();
     return;
   }
 
